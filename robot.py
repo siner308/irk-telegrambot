@@ -32,11 +32,14 @@ def not_supported_command(bot, update):
 def run():
     updater = Updater(TOKEN)
 
-    intel_handler = CommandHandler('intel', intel_command)
-    updater.dispatcher.add_handler(intel_handler)
+    start_handler = CommandHandler('start', help_command)
+    updater.dispatcher.add_handler(start_handler)
 
     help_handler = CommandHandler('help', help_command)
     updater.dispatcher.add_handler(help_handler)
+
+    intel_handler = CommandHandler('intel', intel_command)
+    updater.dispatcher.add_handler(intel_handler)
 
     link_handler = CommandHandler('link', not_supported_command)
     updater.dispatcher.add_handler(link_handler)
