@@ -2,6 +2,8 @@ from telegram.ext import Updater, MessageHandler, Filters, CommandHandler  # imp
 
 from commands.intel import get_intel_screenshot
 from commands.help import get_documents
+from commands.irk import get_irk_community_guide
+
 from logger import getLogger
 from chromedriver import ChromeDriver
 from settings import TOKEN
@@ -18,6 +20,10 @@ def get_message(bot, update):
 # commands
 def intel_command(bot, update):
     get_intel_screenshot(robot, bot, update)
+
+
+def irk_comm_command(bot, update):
+    get_irk_community_guide(robot, bot, update)
 
 
 def help_command(bot, update):
@@ -43,6 +49,9 @@ def run():
 
     link_handler = CommandHandler('link', not_supported_command)
     updater.dispatcher.add_handler(link_handler)
+
+    irk_comm_handler = CommandHandler('irk', irk_comm_command)
+    updater.dispatcher.add_handler(irk_comm_handler)
 
     subscribe_handler = CommandHandler('subscribe', not_supported_command)
     updater.dispatcher.add_handler(subscribe_handler)
