@@ -85,13 +85,29 @@ class ChromeDriver:
         self.driver.delete_all_cookies()
         self.driver.get(google_sign_in_url)
         sleep(1)
-        self.driver.find_element_by_name('Email').send_keys(GOOGLE_EMAIL)
+        try:
+            self.driver.find_element_by_name('Email').send_keys(GOOGLE_EMAIL)
+        except:
+            print(self.driver.page_source)
+            self.save_screenshot('Email')
         self.driver.find_element_by_name('signIn').click()
         sleep(1)
-        self.driver.find_element_by_name('Passwd').send_keys(GOOGLE_PASSWORD)
-        self.driver.find_element_by_id('signIn').click()
+        try:
+            self.driver.find_element_by_name('Passwd').send_keys(GOOGLE_PASSWORD)
+        except:
+            self.save_screenshot('Passwd')
+            print(self.driver.page_source)
+        try:
+            self.driver.find_element_by_id('submit').click()
+        except:
+            self.save_screenshot('signIn2')
+            print(self.driver.page_source)
         sleep(1)
-        self.driver.find_element_by_id('submit_approve_access').click()
+        try:
+            self.driver.find_element_by_id('submit_approve_access').click()
+        except:
+            print(self.driver.page_source)
+            self.save_screenshot('login');
         sleep(1)
         # Check Success
         cnt = 0
